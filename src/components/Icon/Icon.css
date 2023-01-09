@@ -1,0 +1,11 @@
+.IconButton {
+    background: none;
+    background-size: 60%;
+    background-position: 60% 40%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 10px;
+    height: 50px;
+    width: 50px;
+    border: none;
+}
