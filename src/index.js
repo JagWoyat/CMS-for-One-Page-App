@@ -9,7 +9,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Admin from './views/Admin/Admin';
 import MainView from './views/Admin/MainView/MainView';
 import DescriptionView from './views/Admin/DescriptionView/DescriptionView';
-import ProfilesView from './views/Admin/ProfilesView/ProfilesView';
 import ContactView from './views/Admin/ContactView/ContactView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

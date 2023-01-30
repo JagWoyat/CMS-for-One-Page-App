@@ -44,12 +44,16 @@ function App() {
       </Button> */}
       {fetch === true && completed === false && fetchData()}
       <div className="AppWrapper">
-        {completed === true && (
+        {completed === true ? (
           <>
             {Object.entries(data).map(([name, obj]) => (
               <Component data={obj} key={name} />
             ))}
           </>
+        ) : (
+          <div className="flex justify-center items-center">
+            <h1>Go to ../admin to add elements to the site</h1>
+          </div>
         )}
       </div>
     </>
