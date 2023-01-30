@@ -1,8 +1,8 @@
-.ButtonWrapper {
+.TitleWrapper {
     display: flex;
     justify-content: right;
     align-items: flex-end;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    left: 30px;
 }

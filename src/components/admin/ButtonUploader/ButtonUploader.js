@@ -2,7 +2,7 @@ import { Button } from '@material-tailwind/react';
 import { useState } from 'react';
 import './../Borders.css';
 
-export default function ButtonUploader({ type }) {
+export default function ButtonUploader({ title, name }) {
   const [buttons, setButtons] = useState(['Button']);
 
   const newButton = (event) => {
@@ -22,7 +22,7 @@ export default function ButtonUploader({ type }) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type, buttons }),
+      body: JSON.stringify({ name, title, buttons }),
     };
     fetch(url, requestOptions)
       .then((response) => console.log('Submitted successfully'))
@@ -31,7 +31,7 @@ export default function ButtonUploader({ type }) {
 
   return (
     <div className="UploadWrapper">
-      <h1>{type}</h1>
+      <h1>{title}</h1>
       <form onSubmit={handleSubmit}>
         {buttons.map((title, id) => (
           <input key={id} value={title} onChange={onNameChange(id)}></input>

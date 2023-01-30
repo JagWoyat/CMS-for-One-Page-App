@@ -6,7 +6,11 @@ import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider } from '@material-tailwind/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Admin from './views/Admin';
+import Admin from './views/Admin/Admin';
+import MainView from './views/Admin/MainView/MainView';
+import DescriptionView from './views/Admin/DescriptionView/DescriptionView';
+import ProfilesView from './views/Admin/ProfilesView/ProfilesView';
+import ContactView from './views/Admin/ContactView/ContactView';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +20,30 @@ root.render(
         <Routes>
           <Route path="/" element={<Root />} />
           <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin/main"
+            element={
+              <Admin>
+                <MainView />
+              </Admin>
+            }
+          />
+          <Route
+            path="/admin/description"
+            element={
+              <Admin>
+                <DescriptionView />
+              </Admin>
+            }
+          />
+          <Route
+            path="/admin/contact"
+            element={
+              <Admin>
+                <ContactView />
+              </Admin>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -1,9 +1,20 @@
-import { Typography, Button } from '@material-tailwind/react';
+import { Typography } from '@material-tailwind/react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-export default function Main({ tlo, data, title }) {
+export default function Main({ data }) {
+  const [tlo, setTlo] = useState('');
+
+  useEffect(() => {
+    axios.get('/uploads/imgs/' + data.Background).then((res) => {
+      setTlo(res.config.url);
+    });
+  });
+
   return (
     <>
-      <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32">
+      <div className="relative flex h-screen content-center items-center justify-center pt-16 pb-32 z-10">
+        <h1 className="absolute left-8 top-8 text-4xl text-white font-bold z-50">{data.Header}</h1>
         <div
           style={{
             backgroundImage: `url(${tlo})`,
@@ -15,21 +26,13 @@ export default function Main({ tlo, data, title }) {
           <div className="flex flex-wrap items-center">
             <div className="ml-auto mr-auto w-full px-4 text-center lg:w-8/12">
               <Typography variant="h1" color="white" className="mb-6 font-black">
-                {title}
+                {data.Title}
               </Typography>
               <Typography variant="lead" color="white" className="opacity-80">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Accumsan tortor posuere ac ut consequat
-                semper viverra. Suscipit adipiscing bibendum est ultricies integer quis. Sit amet
-                venenatis urna cursus eget nunc scelerisque.
+                {data.Paragraph}
               </Typography>
             </div>
           </div>
-        </div>
-        <div className="ButtonWrapper">
-          {data.map((text, id) => (
-            <Button key={id}>{text}</Button>
-          ))}
         </div>
       </div>
     </>

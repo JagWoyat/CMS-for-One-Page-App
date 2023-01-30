@@ -46,10 +46,14 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 router.post('/upload', upload.any(), function (req, res, err) {
-  fs.writeFile('./uploads/paths/' + req.body.title + '.txt', req.files[0].filename, function (err) {
+  let dir = './uploads/paths/' + req.body.name;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+
+  fs.writeFile(dir + '/' + req.body.title + '.txt', req.files[0].filename, function (err) {
     if (err) return console.log(err);
   });
-  console.log(req.files);
   if (!req.files) {
     res.status(500);
     return err;
@@ -63,13 +67,22 @@ router.post('/contact', (req, res) => {
     email: req.body.email,
     message: req.body.message,
   };
+  let dir = './uploads/messages/';
+  let json = JSON.stringify(cont);
+  fs.writeFile(dir + cont.email + Date.now().toString() + '.txt', json, function (err) {
+    if (err) return console.log(err);
+  });
   res.json(cont);
 });
 
 router.post('/arr', (req, res) => {
   cont = req.body;
-  var json = JSON.stringify(cont.buttons);
-  fs.writeFile('./uploads/paths/' + cont.type + '.txt', json, function (err) {
+  let dir = './uploads/paths/' + cont.name;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+  let json = JSON.stringify(cont.buttons);
+  fs.writeFile(dir + '/' + cont.title + '.txt', json, function (err) {
     if (err) return console.log(err);
   });
   res.json(cont);
@@ -77,11 +90,36 @@ router.post('/arr', (req, res) => {
 
 router.post('/text', (req, res) => {
   cont = req.body;
-  var json = JSON.stringify(cont.text);
-  fs.writeFile('./uploads/paths/' + cont.type + '.txt', json, function (err) {
+  let dir = './uploads/paths/' + cont.name;
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
+  let json = JSON.stringify(cont.text);
+  fs.writeFile(dir + `/` + cont.title + '.txt', json, function (err) {
     if (err) return console.log(err);
   });
   res.json(cont);
+});
+
+router.post('/views', (req, res) => {
+  cont = req.body;
+  try {
+    const file = fs.readFileSync('./uploads/layout.txt', 'utf-8');
+    let data = JSON.parse(file);
+    data[cont.name] = cont.type;
+    const nowe = JSON.stringify(data);
+    fs.writeFile('./uploads/layout.txt', nowe, function (err) {
+      if (err) return console.log(err);
+    });
+  } catch (err) {
+    let data = {};
+    data[cont.name] = cont.type;
+    const nowe = JSON.stringify(data);
+    fs.writeFile('./uploads/layout.txt', nowe, function (err) {
+      if (err) return console.log(err);
+    });
+    res.json(cont);
+  }
 });
 
 module.exports = router;

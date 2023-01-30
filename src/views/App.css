@@ -1,7 +1,6 @@
 .AppWrapper {
-    width: 80rem;
     margin-inline: auto;
-    
+    z-index: 0;
 }
 
 
@@ -16,6 +15,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
+    z-index: 9999;
 }
 
 .ButtonWrapper {

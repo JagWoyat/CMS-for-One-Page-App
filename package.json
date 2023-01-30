@@ -4,8 +4,11 @@
   "private": true,
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@heroicons/react": "^2.0.13",
     "@material-tailwind/react": "^1.2.4",
+    "@mui/material": "^5.11.4",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",

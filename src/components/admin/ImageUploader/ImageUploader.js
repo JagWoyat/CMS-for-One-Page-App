@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './../Borders.css';
 
-export default function ImageUploader({ type }) {
+export default function ImageUploader({ title, name }) {
   const [image, setImage] = useState({});
 
   const onFileChange = (event) => {
@@ -14,7 +14,8 @@ export default function ImageUploader({ type }) {
     let formData = new FormData();
 
     formData.append('img', image);
-    formData.append('title', type);
+    formData.append('name', name);
+    formData.append('title', title);
 
     console.log(formData);
     const url = 'http://localhost:4000/api/upload';
@@ -29,7 +30,7 @@ export default function ImageUploader({ type }) {
 
   return (
     <div className="UploadWrapper">
-      <h1>{type}</h1>
+      <h1>{title}</h1>
       <form onSubmit={handleSubmit}>
         <input type="file" onChange={onFileChange} />
         <button type="submit">Upload</button>

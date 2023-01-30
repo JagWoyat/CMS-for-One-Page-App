@@ -1,7 +1,8 @@
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import './../Borders.css';
 
-export default function TextUploader({ type }) {
+export default function TextUploader({ title, name }) {
   const [text, setText] = useState('');
 
   const onNameChange = (event) => {
@@ -15,7 +16,7 @@ export default function TextUploader({ type }) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type, text }),
+      body: JSON.stringify({ name, title, text }),
     };
     fetch(url, requestOptions)
       .then((response) => console.log('Submitted successfully'))
@@ -24,10 +25,10 @@ export default function TextUploader({ type }) {
 
   return (
     <div className="UploadWrapper">
-      <h1>{type}</h1>
+      <h1>{title}</h1>
       <form onSubmit={handleSubmit}>
-        <input value={text} onChange={onNameChange}></input>
-        <button type="submit">Upload</button>
+        <TextField id="outlined-basic" value={text} onChange={onNameChange}></TextField>
+        <Button type="submit">Upload</Button>
       </form>
     </div>
   );
